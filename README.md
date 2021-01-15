@@ -2,7 +2,7 @@
 
 ## How to install it?
 
-Add in your server.cfg the next line:
+Add in your ~server.cfg~ the next line:
 
 `ensure guille_ammurob`
 

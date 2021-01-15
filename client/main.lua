@@ -30,23 +30,6 @@ local anim = true
 local pedviva = true
 local robable = true
 
---[[RegisterNetEvent('guille_ammurob:tiempo')
-AddEventHandler('guille_ammurob:tiempo', function()
-    local contador = true
-    local tiempo = 3000 * 1000
-
-    Citizen.CreateThread(function()
-        while contador do
-            Citizen.Wait(5000)
-            tiempo - 5000
-            print('contando')
-            if tiempo = 0 then
-                contador = false
-                print('fin')
-            end
-        end
-    end)
-end]]
 
 RegisterNetEvent('guille_ammurob:blip')
 AddEventHandler('guille_ammurob:blip', function()
@@ -109,7 +92,6 @@ Citizen.CreateThread(function()
             TriggerServerEvent('guille_ammurob:avisopasma')
             Citizen.Wait(10)
             ped = crearped2("csb_g", vector3(-330.76, 6084.92, 30.44), 221.96)
-            TriggerServerEvent('InteractSound_SV:PlayOnSource', 'ammurob', 1)
             Citizen.Wait(0)
             local pos = GetEntityCoords(ped, false)
             loadDict('missheist_agency2ahands_up')

@@ -41,7 +41,6 @@ AddEventHandler('guille_ammurob:blip', function()
     BeginTextCommandSetBlipName("STRING")
     AddTextComponentString('AmmuNation')
     EndTextCommandSetBlipName(blip)
-    TriggerEvent("guille_ammurob:nuevoped")
 
 
 end)
@@ -55,7 +54,6 @@ AddEventHandler('guille_ammurob:bliprobo', function()
 	SetBlipScale(bliprobo, 3.2)
 	SetBlipColour(bliprobo, 1)
     PulseBlip(bliprobo)
-    TriggerEvent('guille_ammurob:nuevoped')
     
 end)
 
@@ -118,7 +116,6 @@ Citizen.CreateThread(function()
             else
                 TriggerServerEvent("guille_ammurob:fuerablip")
                 TriggerServerEvent('guille_ammurob:reloj')
-                TriggerEvent('guille_ammurob:nuevoped')
                 iniciado = false
             end
         end
@@ -136,7 +133,6 @@ Citizen.CreateThread(function()
                 DeleteObject(objeto)
                 cajaentregada = false
                 robable = false
-                TriggerEvent('guille_ammurob:nuevoped')
             end   
         end
     end

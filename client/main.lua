@@ -166,6 +166,9 @@ function crearped2(hash, coords, heading)
     SetBlockingOfNonTemporaryEvents(ped, true)
     SetPedCombatAttributes(ped, 46, true)
     SetPedFleeAttributes(ped, 0, 0)
+    NetworkRegisterEntityAsNetworked(ped)
+    SetNetworkIdCanMigrate(NetworkGetNetworkIdFromEntity(ped, true))
+    SetNetworkIdExistsOnAllMachines(NetworkGetNetworkIdFromEntity(ped, true))
     return ped
 end
 

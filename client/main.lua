@@ -1,14 +1,5 @@
-ESX = nil
+-- Guille_Ammurob Optimized by VisiBait -> https://github.com/visibait. Original author: guillerp8 -> https://github.com/guillerp8
 
-
-
-Citizen.CreateThread(function() 
-    while ESX == nil do 
-        TriggerEvent('esx:getSharedObject', function(obj) ESX = obj end) 
-        TriggerEvent('guille_ammurob:blip')
-        Citizen.Wait(0) 
-    end 
-end)
 
 local Keys = {
     ["ESC"] = 322, ["F1"] = 288, ["F2"] = 289, ["F3"] = 170, ["F5"] = 166, ["F6"] = 167, ["F7"] = 168, ["F8"] = 169, ["F9"] = 56, ["F10"] = 57, 
@@ -23,7 +14,16 @@ local Keys = {
 }
 
 
-local jugador = PlayerPedId()
+ESX = nil
+
+Citizen.CreateThread(function() 
+    while ESX == nil do 
+        TriggerEvent('esx:getSharedObject', function(obj) ESX = obj end) 
+        TriggerEvent('guille_ammurob:blip')
+        Citizen.Wait(0) 
+    end 
+end)
+
 local iniciado = false
 local cajaentregada = false
 local anim = true
@@ -64,7 +64,6 @@ end)
 
 RegisterNetEvent('guille_ammurob:disponible')
 AddEventHandler('guille_ammurob:disponible', function()
-    print('dispo')
     robable = true
     anim = true
     pedviva = true
@@ -72,9 +71,7 @@ end)
 
 RegisterNetEvent('guille_ammurob:nodisponible')
 AddEventHandler('guille_ammurob:nodisponible', function()
-    print('nodispo')
     robable = false
-
 end)
 
 
@@ -83,6 +80,8 @@ end)
 Citizen.CreateThread(function()    
     while true do
         Citizen.Wait(0)
+        local sleep = true
+        local jugador = PlayerPedId()
         if anim and IsPedArmed(jugador, 5) and GetDistanceBetweenCoords(vector3(-332.04, 6085.28, 30.5), GetEntityCoords(jugador, true)) < 4 and robable then
             print('check')
             TriggerServerEvent('guille_ammurob:reloj')
@@ -118,6 +117,7 @@ Citizen.CreateThread(function()
                 TriggerServerEvent('guille_ammurob:reloj')
                 iniciado = false
             end
+            sleep = false
         end
 
         while cajaentregada do
@@ -134,23 +134,21 @@ Citizen.CreateThread(function()
                 cajaentregada = false
                 robable = false
             end   
+            sleep = false
         end
+
+        if iniciado then
+            sleep = false
+            DrawMissionText("Espera a que el empleado del Ammu Nation te entregue ~r~las armas")
+        end
+
+        if sleep then Citizen.Wait(500) end
+
     end
 end)  
 
--- Pendiente rehacer este loop asqueroso / I must remake this shitty loop omfg i'm retard
 
-Citizen.CreateThread(function()
-    while true do
-        Citizen.Wait(0)
-        if iniciado then
-            DrawMissionText("Espera a que el empleado del Ammu Nation te entregue ~r~las armas")
-        end
-    end
-end)
-
-
-function crearped2(hash, coords, heading)
+crearped2 = function(hash, coords, heading)
     RequestModel(hash)
     while not HasModelLoaded(hash) do
         Wait(5)
@@ -180,7 +178,7 @@ loadDict = function(dict)
 end
 
 
-function DrawMissionText(msg, time)
+DrawMissionText = function(msg, time)
 	BeginTextCommandPrint('STRING')
 	AddTextComponentSubstringPlayerName(msg)
 	EndTextCommandPrint(time, true)

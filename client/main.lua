@@ -1,4 +1,4 @@
--- Guille_Ammurob Optimized by VisiBait -> https://github.com/visibait. Original author: guillerp8 -> https://github.com/guillerp8
+-- Guille_Ammurob Optimized by VisiBait
 
 
 local Keys = {
